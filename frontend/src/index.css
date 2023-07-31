@@ -1,0 +1,349 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --lighter: white;
+  --light: #f6f6f9;
+  --gray: #eeeeee;
+  --dark-gray: #aaaaaa;
+  --dark: #363949;
+  --darker: black;
+
+  --primary: #1976d2;
+  --danger: #d32f2f;
+  --warning: #fbc02d;
+  --success: #388e3c;
+
+  --light-primary: #cfe8ff;
+  --light-danger: #fecdd3;
+  --light-warning: #fff2c6;
+  --light-success: #bbf7d0;
+}
+
+body.dark {
+  --light: #181a1e;
+  --gray: #25252c;
+  --dark: #fbfbfb;
+  --dark-gray: #383842;
+  --lighter: #080808;
+  --darker: white;
+}
+
+
+/* Default Styles */
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  color: var(--dark);
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Home Page */
+
+.home-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR */
+.home-navbar {
+  width: 100%;
+  flex-basis: 50px;
+  background: var(--gray);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1000;
+  box-shadow: 0 0 20px #0000002d;
+}
+
+.home-navbar .brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100px;
+}
+
+.home-navbar .brand .bx {
+  font-size: 1.5em;
+  color: var(--primary);
+}
+
+.home-navbar .brand .brand-name {
+  text-transform: uppercase;
+  color: var(--dark);
+}
+
+.home-navbar .navbar-items {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 40px;
+  margin-right: 20px;
+}
+
+.home-navbar .navbar-items .navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.home-navbar .navbar-items .navbar-menu li a {
+  color: var(--dark);
+  position: relative;
+}
+
+.home-navbar .navbar-items .navbar-menu li a:not(.btn-outline)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  transform-origin: center;
+  transform: scaleX(0) translateY(4px);
+  opacity: 0;
+  height: 2px;
+  background: var(--dark);
+  transition: all 150ms cubic-bezier(.18, .74, .66, .96);
+}
+
+.home-navbar .navbar-items .navbar-menu li a:not(.btn-outline):hover::after,
+.home-navbar .navbar-items .navbar-menu li a.active::after {
+  transform: scaleX(1) translateY(0);
+  opacity: 0.8;
+}
+
+.home-navbar .navbar-items .navbar-menu li a.btn-outline {
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 0.2em 1em;
+  font-size: 15px;
+  border-radius: 2px;
+  transition: all 300ms ease;
+}
+
+.home-navbar .navbar-items .navbar-menu li a.btn-outline:hover {
+  background: var(--light-primary);
+}
+
+/* CONTENT CONTAINER */
+.home-container {
+  background: var(--light);
+  flex: 1;
+  padding: 20px;
+}
+
+.home-container .centered-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  height: 100%;
+}
+
+/* FOOTER */
+footer {
+  width: 100%;
+  flex-basis: 40px;
+  background: #25252c;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LANDING PAGE */
+.landing-page .banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.landing-page .banner .title {
+  text-align: center;
+  font-size: 2.3em;
+  width: 500px;
+  color: var(--dark);
+}
+
+.landing-page .banner .subtitle {
+  color: var(--dark);
+  margin-top: 10px;
+  font-size: 1em;
+  width: 500px;
+  text-align: center;
+}
+
+.landing-page .banner .action-btn {
+  margin-top: 20px;
+  padding: 10px 40px;
+  background: var(--primary);
+  border-radius: 10px;
+  color: white;
+  transition: all 300ms ease;
+  border: 1px solid transparent;
+}
+
+.landing-page .banner .action-btn:hover {
+  background: var(--light-primary);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.landing-page .features {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 0 80px;
+}
+
+.landing-page .features .feature {
+  flex: 1;
+  display: flex;
+  align-items: start;
+  gap: 20px;
+}
+
+.landing-page .features .feature .bx {
+  color: var(--primary);
+  font-size: 40px;
+}
+
+.landing-page .features .feature .feature-content {
+  height: 150px;
+  color: var(--dark);
+  font-size: 0.9em;
+}
+
+/* SIGN UP PAGE */
+
+h1.page-title {
+  font-size: 2.5em;
+  color: var(--dark);
+}
+
+h1.page-title~.subtitle {
+  color: var(--dark);
+  margin-bottom: 15px;
+}
+
+.signup-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  background: var(--lighter);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 20px #0000002d;
+}
+
+.input-row {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.input-row .input-group {
+  flex: 1;
+  width: 100%;
+}
+
+.input-row .input-group label {
+  width: 100%;
+  color: var(--dark);
+  font-size: 0.9em;
+}
+
+.input-row .input-group input {
+  width: 100%;
+  height: 35px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--dark-gray);
+  border-radius: 5px;
+  background: var(--light);
+  color: var(--dark);
+}
+
+.button-row {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+  text-align: center;
+  height: 40px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.btn-primary:hover {
+  background: rgb(14, 68, 138);
+}
+
+.btn:disabled {
+  background: var(--gray);
+  color: gray;
+  cursor: auto;
+}
+
+.input-option {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: var(--light-primary);
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 300ms ease;
+  outline: none;
+  border: none;
+  color: black;
+  font-size: 1em;
+}
+
+.input-option:hover {
+  background: var(--light-success);
+}
+
+.input-option.active {
+  background: var(--success);
+  color: white;
+}
+
+.input-option .bx {
+  font-size: 2.5em;
+}
+
+.input-option p {
+  margin-top: 5px;
+}
