@@ -28,7 +28,6 @@ body.dark {
   --darker: white;
 }
 
-
 /* Default Styles */
 * {
   margin: 0;
@@ -114,7 +113,7 @@ a {
   content: '';
   position: absolute;
   left: 0;
-  bottom: -1px;
+  bottom: -2px;
   width: 100%;
   transform-origin: center;
   transform: scaleX(0) translateY(4px);
@@ -124,9 +123,13 @@ a {
   transition: all 150ms cubic-bezier(.18, .74, .66, .96);
 }
 
-.home-navbar .navbar-items .navbar-menu li a:not(.btn-outline):hover::after,
 .home-navbar .navbar-items .navbar-menu li a.active::after {
-  transform: scaleX(1) translateY(0);
+  transform: scaleX(1) translateY(0) !important;
+  opacity: 0.8;
+}
+
+.home-navbar .navbar-items .navbar-menu li a:not(.btn-outline):hover::after {
+  transform: scaleX(0.5) translateY(0);
   opacity: 0.8;
 }
 
@@ -256,23 +259,51 @@ h1.page-title~.subtitle {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 10px 10px 20px #0000002d;
+  height: 415px;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-step {
+  opacity: 0;
+  transition: all 500ms ease;
+  visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  left: 0;
+  top: 60px;
+  transform: translate(200%) scale(0.5);
+}
+
+.form-step-old {
+  transform: translate(-100%) scale(0.5);
+}
+
+.form-step-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0) scale(1);
 }
 
 .input-row {
   display: flex;
   gap: 15px;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .input-row .input-group {
   flex: 1;
   width: 100%;
+  position: relative;
 }
 
 .input-row .input-group label {
   width: 100%;
   color: var(--dark);
   font-size: 0.9em;
+  transition: color 300ms ease;
 }
 
 .input-row .input-group input {
@@ -284,16 +315,53 @@ h1.page-title~.subtitle {
   border-radius: 5px;
   background: var(--light);
   color: var(--dark);
+  transition: all 300ms ease;
+}
+
+.input-row .input-group::after {
+  transition: opacity 300ms ease;
+  opacity: 0;
+  content: '';
+}
+
+.input-row .input-group:not([data-validation=""])::after {
+  content: attr(data-validation);
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  bottom: -18px;
+  font-size: 12px;
+  color: var(--danger);
+  border-radius: 10px;
+  opacity: 1;
+}
+
+.input-row .input-group:not([data-validation=""]) label {
+  color: var(--danger);
+}
+
+.input-row .input-group:not([data-validation=""]) input {
+  border: 1px solid var(--danger);
 }
 
 .button-row {
   margin-top: 20px;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
-.btn-primary {
-  background: var(--primary);
-  color: white;
+.button-row-submit {
+  position: absolute;
+  width: 100%;
+  padding: 20px;
+  bottom: 60px;
+  left: 0;
+}
+
+.btn {
   border: none;
   text-align: center;
   height: 40px;
@@ -301,10 +369,30 @@ h1.page-title~.subtitle {
   border-radius: 5px;
   cursor: pointer;
   transition: all 300ms ease;
+  flex: 2;
+}
+
+.btn-smaller {
+  flex: 1;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
 }
 
 .btn-primary:hover {
   background: rgb(14, 68, 138);
+}
+
+.btn-secondary {
+  background: var(--light);
+  color: var(--dark);
+  border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+  background: var(--dark-gray);
 }
 
 .btn:disabled {
@@ -313,9 +401,19 @@ h1.page-title~.subtitle {
   cursor: auto;
 }
 
+.input-options-large {
+  height: calc(100% - 180px);
+}
+
+.input-options-large.invalid .input-option {
+  border: 1px solid var(--danger);
+  background: var(--light-danger);
+}
+
 .input-option {
   flex: 1;
   width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -329,6 +427,8 @@ h1.page-title~.subtitle {
   border: none;
   color: black;
   font-size: 1em;
+  transition: all 300ms ease;
+  border: 1px solid transparent;
 }
 
 .input-option:hover {
@@ -341,9 +441,20 @@ h1.page-title~.subtitle {
 }
 
 .input-option .bx {
-  font-size: 2.5em;
+  font-size: 5em;
 }
 
 .input-option p {
-  margin-top: 5px;
+  margin-top: 0.5em;
+}
+
+p.validation-error {
+  opacity: 0;
+  transition: opacity 300ms ease;
+  font-size: 14px;
+  color: var(--danger);
+}
+
+p.validation-error.active {
+  opacity: 1;
 }
