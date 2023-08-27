@@ -1,0 +1,13 @@
+POST http://localhost:3100/user/signup
+Content-Type: application/json
+
+{
+  "first_name": "Luis",
+  "last_name": "Amado",
+  "email": "a2@a.com",
+  "password": "password",
+  "role": "teacher"
+}
+
+###
+GET http://localhost:3100/user
