@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 import userRoute from './routes/user';
 
@@ -9,6 +10,7 @@ const app = express();
 const port = 3100;
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 
 // Routes

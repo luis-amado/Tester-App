@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import FormInput from "../../components/FormInput";
 import ValidationMessage from "../../components/ValidationMessage";
+import axios from '../../api/axios';
+import { AxiosError } from 'axios';
 
 enum Role {
   TEACHER, STUDENT, UNSET
@@ -49,6 +51,11 @@ const SignupPage = () => {
 
   const continueForm = () => {
 
+    // make sure previous validation has been addressed by the user
+    for (const validationField in validationMsg) {
+      if (validationMsg[validationField as keyof typeof validationMsg] != "") return;
+    }
+
     //validate the input before continuing
     let valid = true;
     const validation = { firstName: "", lastName: "", email: "", password: "", role: "" };
@@ -69,7 +76,7 @@ const SignupPage = () => {
       valid = false;
     }
     if (formData.password.length < 8) {
-      validation.password = "Password must be at least 8 characters.";
+      validation.password = "Password must be at least 8 characters";
       valid = false;
     }
     if (formData.password == "") {
@@ -85,14 +92,42 @@ const SignupPage = () => {
   const goBack = () => {
     setPage(0);
   };
-  const submitForm = () => {
+  const submitForm = async () => {
 
-    // make sure an option has been selected
+    // make sure a role option has been selected
     if (formData.role == Role.UNSET) {
       setValidationMsg({
         ...validationMsg,
-        role: "Please select an option."
+        role: "Please select an option"
       });
+      return;
+    }
+
+    // send the request
+    try {
+      const response = await axios.post('user/signup', {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+        role: formData.role == Role.STUDENT ? 'student' : 'teacher'
+      });
+
+      // user creation successful
+
+      console.log(response);
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        if (err.response?.status == 409) {
+          // The API indicated that the email is already in use
+          setPage(0);
+          setValidationMsg({
+            ...validationMsg, email: "This email address is already in use"
+          });
+          return;
+        }
+      }
+      console.log("Unexpected error occurred");
       return;
     }
 
