@@ -1,29 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from 'react-router-dom';
 
 const HomeNavbar = () => {
+
+  const [visible, setVisible] = useState(false);
+
+  const dismiss = () => {
+    setVisible(false);
+  };
+
   return (
     <nav className="home-navbar">
-      <Link to="/" className="brand">
-        <i className="bx bxs-chalkboard"></i>
-        <h3 className="brand-name">Tester</h3>
-      </Link>
-      <div className="navbar-items">
+      <div className="top-section">
+        <Link onClick={dismiss} to="/" className="brand">
+          <i className="bx bxs-chalkboard"></i>
+          <h3 className="brand-name">Tester</h3>
+        </Link>
+        <button onClick={() => setVisible(!visible)} className={`collapse-toggle ${visible ? 'toggled' : ''}`}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div className={`navbar-items ${!visible ? 'collapsed' : ''}`}>
         <ul className="navbar-menu">
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink onClick={dismiss} to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/about">About</NavLink>
+            <NavLink onClick={dismiss} to="/about">About</NavLink>
           </li>
           <li>
-            <NavLink to="/login">Log in</NavLink>
+            <NavLink onClick={dismiss} to="/login">Log in</NavLink>
           </li>
           <li>
-            <NavLink to="/signup">Sign up</NavLink>
+            <NavLink onClick={dismiss} to="/signup">Sign up</NavLink>
           </li>
         </ul>
-        <ul className="navbar-menu">
+        <ul className="navbar-menu hide-700">
           <li>
             <Link className="btn-outline" to="/signup">Get started</Link>
           </li>
